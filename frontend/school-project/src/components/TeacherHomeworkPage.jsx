@@ -14,7 +14,13 @@ function TeacherHomeworkPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!form.title || !form.subject || !form.dueDate) return alert("Enter Title, Due Date, Subject!");
-    const newTask = {...form, id: x, date: Date.now(), status:"Pending"}
+    const currentDate = Date()
+    // const year = currentDate.getFullYear();
+    // const month = currentDate.getMonth(); 
+    // const day = currentDate.getDate();
+    // const dayOfWeek = currentDate.getDay();
+    // const date = `${day}/${month}/${year} ${dayOfWeek}`
+    const newTask = {...form, id: x, date: currentDate, status:"Pending"}
     setTasks([...tasks, newTask])
     setForm({ title: "", description: "", dueDate: "" })
     setX(x+1)
@@ -103,6 +109,9 @@ function TeacherHomeworkPage() {
                    <th className="p-2">Due Date</th>
                    <th className="p-2">Status</th>
                    <th className="p-2">Actions</th>
+                   <th className='p-2'>Subject</th>
+                   <th className='p-2'>Uploaded Date</th>
+                   <th className='p-2'>Description</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,13 +119,16 @@ function TeacherHomeworkPage() {
                   <tr key={task.id} className="border-b hover:bg-gray-50">
                     <td className='p-2'>{task.title}</td>
                     <td className='p-2'>{task.dueDate}</td>
-                    <td className={`p-2 font-medium ${task.status === 'Completed' ? 'text-[green]' : 'text-[yellow]'}`}>{task.status}</td>
+                    <td className={`p-2 font-medium ${task.status === 'Completed' ? 'text-[#64fb7d]' : 'text-[#ff157a]'}`}>{task.status}</td>
                     <td className="p-2 flex gap-3"><button
                         onClick={() => deleteTask(task.id)}
                         className="text-red-600 hover:text-red-800"
                       >
                         🗑 Delete
                       </button></td>
+                      <td className='p-2'>{task.subject}</td>
+                      <td className='p-2'>{task.date}</td>
+                      <td className='p-2'>{task.description}</td>
                   </tr>
                 ))}
               </tbody>
