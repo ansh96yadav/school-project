@@ -12,7 +12,8 @@ function StudentLogin() {
         <input type='text' id='dob' placeholder='Date Of Birth'/></div>
         <div><label htmlFor='admissionNo.'>Admission Number:</label>
         <input type='number' id='admissionNo.' placeholder='Admission Number'/></div>
-        <Link to='/teacherhomeworkpage'><button>Login</button></Link>
+        <p>(Under Construction)</p>
+        <Link to='/teacherhomeworkpage' className='m-auto'><button className='w-fit h-fit cursor-pointer px-4 py-2 rounded-[10px] bg-amber-300'>Skip This Page Please</button></Link>
       </div>
     </div>
   )
