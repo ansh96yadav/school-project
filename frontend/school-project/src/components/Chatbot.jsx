@@ -19,7 +19,7 @@ function Chatbot() {
 
       setDisabled(true)
 
-      const response = await fetch('https://school-project-gm8t.onrender.com/chatbot', { 
+      const response = await fetch('https://project-school-dek5.onrender.com/chatbot', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
