@@ -142,16 +142,43 @@ function HomePage() {
                       <h1 className='text-[white] text-[1.8rem] text-center mt-[1rem]'>Proven Results</h1>
                       <p className='mt-[1rem] text-[#adacac] text-center text-[1.1rem]'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
                       <hr className='h-1 text-[#515151] mt-[2rem]'/>
-                      <div className='mx-auto flex gap-6 items-center justify-center'><div className='flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>85%</p><p>Class X Average</p>
-                      </div><div className='flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>87%</p><p>Classs XII Avearge</p></div></div>
+                      <div className='mx-auto flex gap-6 items-center justify-center'><div className='flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>85%</p><p className='text-[gray]'>Class X Average</p>
+                      </div><div className='flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>87%</p><p className='text-[gray]'>Classs XII Avearge</p></div></div>
                       </div>
                     <div className='w-[100%] h-[100%] p-10 rounded-[20px] bg-[#18182a]'>
                       <FaIcons.FaAward className='text-[white] text-[3rem] w-fit h-fit p-4 mx-auto bg-[#593df2] rounded-[20px] opacity-90 border-solid border-8 border-[#3b3562]'/>
                       <h1 className='text-[white] text-[1.8rem] text-center mt-[1rem]'>Expert Team</h1>
                       <p className='mt-[1rem] text-[#adacac] text-center text-[1.1rem]'>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis.</p>
                       <hr className='h-1 text-[#515151] mt-[2rem]'/>
-                      <div className='mx-auto flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>100+</p><p>Skilled Teachers</p></div>
+                      <div className='mx-auto flex flex-col items-center justify-center'><p className='text-[2rem] mt-[0.5rem] text-[#5d37e5]'>100+</p><p className='text-[gray]'>Skilled Teachers</p></div>
                       </div>
+                  </div>
+                  <div>
+                    
+                  </div>
+                </div>
+                <div>
+                  <h1 className='text-[white] text-[2.5rem] text-center mt-[10rem]'>Contact</h1>
+                  <p className='text-[gray] text-center'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  <div className='px-30 mt-[5rem]'>
+                    <div className='rounded-[20px] w-[42%] overflow-hidden'>
+                    <div className='w-[100%] h-[100%] p-10 bg-[#1b1b34] border-t-4 border-[#692af1]'>
+                      <FaIcons.FaCommentDots className='text-[white] w-fit h-fit p-4 rounded-[20px] text-[2rem] bg-[#3636e0] mx-auto'/>
+                      <p className='text-[white] text-center text-[1.7rem] mt-6'>Lets's start a conversation.</p>
+                      <p className='text-[1.1rem] text-[#9f9f9f] text-center mt-2'>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint.</p>
+                      <form className='flex flex-col mt-10'>
+                       <div className='flex justify-between'>
+                        <input type='text' className='w-[45%] h-[3rem] rounded-[15px] border-2 text-[white] border-[#3f3f3fb7] pl-4 bg-[#0f0625] placeholder:text-[gray] focus:border-[blue]' placeholder='Your Name'/>
+                        <input type='email' className='w-[45%] h-[3rem] rounded-[15px] border-2 text-[white] border-[#3f3f3fb7] pl-4 bg-[#0f0625] placeholder:text-[gray] focus:border-[blue]' placeholder='Email Address'/></div> 
+                        <input type='text' className='w-[full] h-[3rem] mt-[1.5rem] rounded-[15px] border-2 text-[white] border-[#3f3f3fb7] pl-4 bg-[#0f0625] placeholder:text-[gray] focus:border-[blue]' placeholder='Subject'/>
+                        <textarea  className='w-[full] h-[7rem] mt-6 rounded-[15px] border-2 text-[white] border-[#3f3f3fb7] text-[1.1rem] pl-4 bg-[#0f0625] placeholder:text-[gray] pt-2 focus:border-[blue]' placeholder='Message'/>
+                        <button className='flex w-full h-14 py-2 mt-6 bg-[#5a4ff2] cursor-pointer text-[1.1rem] text-[white] justify-center items-center gap-2 rounded-[15px]'>Send Message <FaIcons.FaPaperPlane/></button>
+                    </form></div></div>
+                    <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    </div>
                   </div>
                 </div>
       </main>
