@@ -4,30 +4,140 @@ import { Link } from 'react-router-dom'
 import FacilitiesCard from './FacilitiesCard'
 import * as FaIcons  from 'react-icons/fa'
 import { MdSelfImprovement,MdSportsMartialArts } from 'react-icons/md'
+import { FaXTwitter } from 'react-icons/fa6';
+import { useState,useRef,useEffect,useCallback } from 'react'
+// import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 
 function HomePage() {
 
-  const CardData = [
-    {title: 'Well Equipped Library',},
-    {title: 'Well Equipped Library'},
-    {title: 'Well Equipped Library'},
-    {title: 'Well Equipped Library'},
-    {title: 'Well Equipped Library'},
-    {title: 'Well Equipped Library'},
-  ]
+  const [isMainOpen, setMainIsOpen] = useState(false);
+  const [isFirstOpen, setIsFirstOpen] = useState(false)
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setMainIsOpen(!isMainOpen);
+  const switchingDropdown1 = () => setMainIsOpen(true)
+  const switchingDropDown2 = () => setMainIsOpen(false)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef(null);
+
+
+  const toggleFirstDropdown = () => setIsFirstOpen(!isFirstOpen);
+  const switchingFirstDropdown1 = () => setIsFirstOpen(true)
+  const switchingFirstDropDown2 = () => setIsFirstOpen(false)
+
+const moreoptions = [
+  { id: 1, name: "Academics" },
+  { id: 2, name: "Admission/Fee/TC" },
+  { id: 3, name: "HPD Corner" },
+  {
+    id: 4,
+    name: "Gallery",
+    subItems: [
+      { id: "g1", name: "Photos" },
+      { id: "g2", name: "Videos" },
+      { id: "g3", name: "Events" },
+    ],
+  },
+];
+const images = ['aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg']
+
+
+//  const settings = {
+//     dots: true,
+//     infinite: true,         // loops endlessly
+//     speed: 800,             // transition speed in ms
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//     autoplay: true,         // auto sliding
+//     autoplaySpeed: 3000,    // 3 seconds delay
+//     fade: true,             // smooth fading effect
+//     pauseOnHover: false,    // keeps sliding even when hovered
+//   };
+  
+//   const SLIDE_WIDTH = 600; 
+// const TRANSITION_DURATION = 500;
+//   const[currentIndex,setCurrentIndex]= useState(0)
+  
+//  const slideImage = useCallback((direction) => {
+//         setCurrentIndex(prevIndex => {
+//             let newIndex = prevIndex + direction;
+
+//             if (newIndex < 0) {
+//                 newIndex = images.length - 1; // Loop back
+//             } else if (newIndex >= images.length) {
+//                 newIndex = 0; // Loop forward
+//             }
+//             return newIndex;
+//         });
+//     }, []);
+
+//     // Auto-slide functionality (runs every 5 seconds)
+//     useEffect(() => {
+//         const intervalId = setInterval(() => {
+//             slideImage(1); 
+//         }, 5000); 
+
+//         return () => clearInterval(intervalId);
+//     }, [slideImage]);
+
+//     // Calculates the CSS transformation needed to show the current image
+//     const transformStyle = {
+//         // Total width of the track (e.g., 4 slides * 600px = 2400px)
+//         width: `${images.length * SLIDE_WIDTH}px`,
+        
+//         // This moves the whole track left by the width of the current slide
+//         transform: `translateX(-${currentIndex * SLIDE_WIDTH}px)`, 
+        
+//         // Apply smooth transition
+//         transition: `transform ${TRANSITION_DURATION}ms ease-in-out`,
+//     };
+
 
   return (
     <div className='w-screen h-fit bg-[#02021d] py-[2rem]'>
       {/* Nav Section */}
       <nav className='w-[85%] p-4 px-6 m-auto stick z-1000 flex justify-between items-center rounded-[50px] bg-[#2b2058c0]'>
         <p className='text-white text-[1.4rem]'>Army Public School,Jhansi</p>
-        <ul className='flex text-[#bababa] justify-between w-[40%] text-[1.1rem] cursor-pointer'><li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>Home</li>
-        <li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>About</li>
-        <li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>Services</li>
+        <ul className='text-[#bababa] justify-between lg:w-[45%]  hidden lg:flex text-[1.1rem] cursor-pointer'>
+          <li className='cursor-pointer hover:text-white border-b-2 border-transparent navlink-animation hover:border-[#1216ef]'>Home</li>
+        <a href='#about'><li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>About</li></a>
+        <a href='#facilities'><li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>Facilities</li></a>
         <li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>Mentor</li>
         <li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>Contact</li>
-        <li className='cursor-pointer hover:text-white border-b-2 border-transparent hover:border-[#1216ef]'>More</li></ul>
+        <li className='cursor-pointer hover:text-white border-b-2 border-transparent'><button type="button" onMouseOver={switchingDropdown1} onMouseOut={switchingDropDown2} onClick={toggleDropdown}>
+        More
+        {/* Optional: Add an arrow icon that rotates */}
+        <span>{isMainOpen ? ' ▲' : ' ▼'}</span> 
+      </button>
+      {isMainOpen && (
+        <div onMouseOver={switchingDropdown1} onMouseOut={switchingDropDown2} className='absolute flex bg-[#101031] flex-col'>
+        {moreoptions.map((option)=> (
+          <div>
+          <div className="dropdown-menu w-[100%] h-[fit] px-4 py-4 bg-[#1a1a50] hover:bg-[#292964]">
+          {option.name}
+          {option.subItems && <span className="ml-2">▶</span>}
+        </div>{option.subItems && (
+            <div className="absolute top-0 left-full hidden group-hover:flex flex-col bg-[#1a1a50] rounded-lg shadow-lg z-50">
+              {option.subItems.map((sub) => (
+                <div
+                  key={sub.id}
+                  className="px-4 py-3 hover:bg-[#292964] cursor-pointer whitespace-nowrap"
+                >
+                  {sub.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</li></ul>
         <button className='w-fit h-fit rounded-[20px] bg-[#8f6ff7] px-4 py-1 cursor-pointer text-white text-[1.3rem]'>Login</button>
       </nav>  
       <main>
@@ -52,7 +162,7 @@ function HomePage() {
                 <div className='flex justify-center items-center'><img src='army-public.jpg' className='w-[80%]'/></div>
                 </div>
                 {/* About Section */}
-                <div className='mt-[15rem] w-[60%] m-auto'>
+                <div className='mt-[15rem] w-[60%] m-auto' id='about'>
                   <div className=''><p className='text-[#6227ea] text-[1.2rem]'>Discover More About Us</p>
                   <h1 className='text-[white] mt-[1rem] text-[2.5rem]'>About Us</h1>
                   <p className='text-[#9f9d9d]'>
@@ -65,19 +175,59 @@ function HomePage() {
                 </p><div className='text-[white] mt-[2rem]'><ul className='list-none flex flex-col gap-4 text-[1.2rem]'>
                   <li className='flex items-center gap-4'><FaIcons.FaCheckCircle className='text-[#6443f4]'/>Focus on the sports and are leading champions.</li>
                 <li className='flex items-center gap-4'><FaIcons.FaCheckCircle className='text-[#6443f4]'/>Focus on CCA activities.</li>
-                <li className='flex items-center gap-4'><FaIcons.FaCheckCircle className='text-[#6443f4]'/>Interactive activities in class between students.</li></ul></div></div></div>
-                <div className='flex px-50 mt-[2rem]'>
-                  <div className='w-[50%] flex flex-col'>
-                    <img src='aps2.jpg' 
-                    className="w-[80%] rounded-[10px] border-4 border-[#bebcbc87]"/>
+                <li className='flex items-center gap-4'><FaIcons.FaCheckCircle className='text-[#6443f4]'/>Interactive activities in class between students.</li></ul></div></div></div> 
+                  <div className='w-[80%] flex flex-col mx-auto'>
+            {/* <Slider {...settings} 
+            className="text-white bg-[white]">
+        {images.map((src, i) => (
+          <div key={i}>
+            <img
+              src={src}
+              alt={`slide-${i}`}
+              className="w-full h-[500px] object-cover"
+            />
+          </div>
+        ))}
+      </Slider> */}
+      <Swiper
+        modules={[Pagination, Autoplay, Navigation]}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        // pagination={{ clickable: true }}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        className="mySwiper mt-[5rem]"
+      >
+        {images.map((src, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={src}
+              alt={`slide-${index}`}
+              className="w-full h-[500px] object-cover rounded-2xl shadow-lg"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="custom-dots">
+        {images.map((_, i) => (
+          <span
+            key={i}
+            className={`dot ${activeIndex === i ? "active" : ""}`}
+      onClick={() => {
+        if (swiperRef.current) {
+          swiperRef.current.slideToLoop(i); // go to that image
+          setActiveIndex(i);
+        }
+      }}
+          ></span>
+        ))}
+      </div>
                     </div>
-                    <div className='w-[50%]'>
-                      <img src='aps1.jpg' className='w-[80%] rounded-[5px] border-5 z-50 border-[#b5b1b15f]'/></div>
-                  </div>
                   {/* Facilities Section */}
-                  <div className='mt-[10rem]'><p className='text-[2.5rem] text-white text-center'>Facilities</p>
+                  <div className='mt-[10rem]' id='facilities'><p className='text-[2.5rem] text-white text-center'>Facilities</p>
                   <p className='text-[1.2rem] text-[gray] text-center'>Our facilities make us the best.</p>
-                  <div className='grid md:grid-cols-3  mt-[4rem] md:grid-rows-3 grid-cols-1 grid-rows-9 gap-6 items-center place-items-center place-ce w-[80%] m-auto'>
+                  <div className='grid md:grid-cols-2 lg:grid-cols-3  mt-[4rem] md:grid-rows-3 grid-cols-1 grid-rows-9 gap-6 items-center place-items-center place-ce w-[80%] m-auto'>
                     <div className='w-[100%] h-[100%] hover:scale-105 rounded-[20px] border border-[#424242] flex flex-col p-8 bg-[#352b4b69]'>
                       <FaIcons.FaBook className='text-white text-[3rem] w-fit h-fit p-4 rounded-[20px] bg-[#644bf0] mx-auto'/>
                       <h1 className='text-[1.5rem] text-center mt-[1.1rem] text-[white]'>Well Equipped Library</h1>
@@ -129,7 +279,7 @@ function HomePage() {
                 <div className='mt-[10rem]'>
                   <h1 className='text-[2rem] text-[white] text-center'>Why Us?</h1>
                   <p className='text-[1.2rem] text-[gray] text-center'>Beacuse we hav proved that we are the best.</p>
-                  <div className='grid grid-cols-3 mt-[1rem] px-30 gap-6'>
+                  <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-[1rem] lg:px-30 md:px-15 px-8 gap-6'>
                     <div className='w-[100%] h-[100%] p-10 rounded-[20px] bg-[#18182a]'>
                       <FaIcons.FaPalette className='text-[white] text-[3rem] w-fit h-fit p-4 mx-auto bg-[#593df2] rounded-[20px] opacity-90 border-solid border-8 border-[#3b3562]'/>
                       <h1 className='text-[white] text-[1.8rem] text-center mt-[1rem]'>Creative Excellence</h1>
@@ -160,8 +310,8 @@ function HomePage() {
                 <div>
                   <h1 className='text-[white] text-[2.5rem] text-center mt-[10rem]'>Contact</h1>
                   <p className='text-[gray] text-center'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                  <div className='px-30 mt-[5rem]'>
-                    <div className='rounded-[20px] w-[42%] overflow-hidden'>
+                  <div className='lg:px-30 md:px-10 px-8 mt-[5rem] grid lg:grid-cols-7 md:grid-cols-7 sm:grid-cols-1 md:gap-[3rem] gap-[5rem]'>
+                    <div className='rounded-[20px] w-[100%] lg:col-span-3 md:col-span-3 col-span-1 overflow-hidden'>
                     <div className='w-[100%] h-[100%] p-10 bg-[#1b1b34] border-t-4 border-[#692af1]'>
                       <FaIcons.FaCommentDots className='text-[white] w-fit h-fit p-4 rounded-[20px] text-[2rem] bg-[#3636e0] mx-auto'/>
                       <p className='text-[white] text-center text-[1.7rem] mt-6'>Lets's start a conversation.</p>
@@ -174,37 +324,47 @@ function HomePage() {
                         <textarea  className='w-[full] h-[7rem] mt-6 rounded-[15px] border-2 text-[white] border-[#3f3f3fb7] text-[1.1rem] pl-4 bg-[#0f0625] placeholder:text-[gray] pt-2 focus:border-[blue]' placeholder='Message'/>
                         <button className='flex w-full h-14 py-2 mt-6 bg-[#5a4ff2] cursor-pointer text-[1.1rem] text-[white] justify-center items-center gap-2 rounded-[15px]'>Send Message <FaIcons.FaPaperPlane/></button>
                     </form></div></div>
-                    <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div className='w-full lg:col-span-4 md:col-span-4 col-span-1 flex flex-col gap-10'>
+                    <div className='w-full flex gap-8 items-center px-10 py-6 bg-[#18182a] rounded-[20px]'>
+                      <FaIcons.FaEnvelope className='w-fit h-fit p-4 rounded-[10px] bg-[#2a2357] text-[white] text-[1.5rem]'/>
+                    <div className='flex flex-col'>
+                      <p className='text-[1.2rem] text-[#734ce6]'>Email Us</p>
+                      <p className='text-[1rem] text-[#ffffff]'>apsjhs@gmail.com</p>
+                      <p className='text-[0.9rem] mt-2 text-[#8d8d8d]'>Response in 2-3 hours.</p></div>
+                    </div>
+                    <div className='w-full flex gap-8 items-center px-10 py-6 bg-[#18182a] rounded-[20px]'>
+                      <FaIcons.FaPhoneAlt className='w-fit h-fit p-4 rounded-[10px] bg-[#2a2357] text-[white] text-[1.5rem]'/>
+                    <div><p className='text-[1.2rem] text-[#734ce6]'>Call Us</p>
+                    <p className='text-[1rem] text-[#ffffff]'>+91 9651604225</p>
+                    <p className='text-[0.9rem] mt-2 text-[#8d8d8d]'>Available from 9:00 AM to 3:00 PM IST</p></div>
+                    </div>
+                    <div className='w-full flex gap-8 items-center px-10 py-6 bg-[#18182a] rounded-[20px]'>
+                      <FaIcons.FaMapMarkerAlt className='w-fit h-fit p-4 rounded-[10px] bg-[#2a2357] text-[white] text-[1.5rem]'/>
+                    <div><p className='text-[1.2rem] text-[#734ce6]'>Visit Us</p>
+                    <p className='text-[1rem] text-[#ffffff]'>Army Public School, Hunter Road, Jhansi Cantt - 284001</p>
+                    <p className='text-[0.9rem] mt-2 text-[#8d8d8d]'>Opens Monday-Friday</p></div>
+                    </div>
+                    <div className=''><p className='text-[1.2rem] text-[white] text-center'>Connect With Us</p>
+                    <div className='flex gap-8 justify-center items-center mt-[1rem]'>
+                      <FaIcons.FaYoutube className='text-[#4d34da] w-fit h-fit p-4 rounded-[20px] bg-[#19193c] text-[1.5rem] cursor-pointer hover:scale-105 hover:text-[white] hover:bg-[#4d34da]'/>
+                    <FaIcons.FaFacebook className='text-[#4d34da] w-fit h-fit p-4 rounded-[20px] bg-[#19193c] text-[1.5rem] cursor-pointer hover:scale-105 hover:text-[white] hover:bg-[#4d34da]'/>
+                    <FaIcons.FaInstagram className='text-[#4d34da] w-fit h-fit p-4 rounded-[20px] bg-[#19193c] text-[1.5rem] cursor-pointer hover:scale-105 hover:text-[white] hover:bg-[#4d34da]'/>
+                    <FaXTwitter className='text-[#4d34da] w-fit h-fit p-4 rounded-[20px] bg-[#19193c] text-[1.5rem] cursor-pointer hover:scale-105 hover:text-[white] hover:bg-[#4d34da]'/>
+                    </div></div>
                     </div>
                   </div>
                 </div>
       </main>
+      <footer className='w-screen mt-[10rem] h-fit bg-[black] border-t border-[#343434] px-20 py-10'>
+        <div className='text-white'><Link to='/teacherhomeworkpage'><p>Army Public School, Jhansi</p></Link>
+        <p>Hunter Road</p>
+        <p>Jhansi Cantt - 284001</p>
+        <p>Phone: +91 9651604225</p>
+        <p>Email: apsjhs@gmail.com</p></div>
+      </footer>
     </div>
   )
 }
 
 export default HomePage
 
-
-
-{/* <div>
-        <div className='h-[6rem] pt-[2rem] bg-[#2f2f2f]'>
-          <ul className='list-none text-[1.3rem] text-[white] flex justify-around'>
-            <li className='hover:underline hover:text-[#1717fe] cursor-pointer'><Link to='/'>Home</Link></li>
-            <li className='hover:underline hover:text-[#1717fe] cursor-pointer'><Link to='/school'>School</Link></li>
-            <li className='hover:underline hover:text-[#1717fe] cursor-pointer'><Link to='/contact'>Contact Us</Link></li>
-            <li className='hover:underline hover:text-[#1717fe] cursor-pointer'>About Us</li>
-          </ul>
-        </div>
-        <div className='flex items-center justify-between mt-[2rem]'>
-          <div>
-          <img src='army-school-logo.png' className='w-35'/>
-          </div>
-          <div className='justify-self-center self-center'><p className='text-[2.5rem] font-extrabold text-center justify-self-center self-center'>Army Public School, Jhansi</p></div>
-          <div className='flex-none'></div>
-      </div>
-              <Link to='/chatbot'><img src='chatbot.png' className='w-20 fixed top-[85%] left-[90%] right-[10%] cursor-pointer z-50'/></Link>
-</div> */}
