@@ -44,7 +44,7 @@ const moreoptions = [
     ],
   },
 ];
-const images = ['aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg']
+const images = ['aps1.jpg','aps2.jpg','aps3.jpg','aps4.jpg','aps5.jpg','aps6.jpg','aps7.jpg','aps8.jpg']
 
 
 //  const settings = {
@@ -356,11 +356,11 @@ const images = ['aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg','aps1.jpg','aps2.jpg
                 </div>
       </main>
       <footer className='w-screen mt-[10rem] h-fit bg-[black] border-t border-[#343434] px-20 py-10'>
-        <div className='text-white'><Link to='/teacherhomeworkpage'><p>Army Public School, Jhansi</p></Link>
-        <p>Hunter Road</p>
-        <p>Jhansi Cantt - 284001</p>
-        <p>Phone: +91 9651604225</p>
-        <p>Email: apsjhs@gmail.com</p></div>
+        <div className='text-white'><Link to='/teacherhomeworkpage'><p className='text-[2rem]'>Army Public School, Jhansi</p></Link>
+        <Link to='/identifier'><p className='text-[#c1bebe] font-extralight'>Hunter Road</p></Link>
+        <p className='text-[#c1bebe] font-extralight'>Jhansi Cantt - 284001</p>
+        <p className='text-[#c1bebe] font-extralight'><span className='text-[white] text-[1.1rem]'>Phone:</span> +91 9651604225</p>
+        <p className='text-[#c1bebe] font-extralight'><span className='text-[white] text-[1.1rem]'>Email:</span> apsjhs@gmail.com</p></div>
       </footer>
     </div>
   )
